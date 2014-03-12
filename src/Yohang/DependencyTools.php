@@ -82,7 +82,8 @@ class DependencyTools
         $process->run(function($type, $buffer) use (&$out) { $out .= $buffer; });
 
         if (!$process->isSuccessful()) {
-            throw new \RuntimeException($ifError."\n\n".$out);
+            $stackTrace = var_export(xdebug_print_function_stack(), true);
+            throw new \RuntimeException($ifError."\n\n".$out."\n\n".$stackTrace);
         }
     }
 }
