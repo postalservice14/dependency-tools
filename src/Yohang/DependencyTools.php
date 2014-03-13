@@ -82,6 +82,7 @@ class DependencyTools
         $process->run(function($type, $buffer) use (&$out) { $out .= $buffer; });
 
         if (!$process->isSuccessful()) {
+            echo 'PATH: ' . getenv('PATH');
             $realCmd = $cmd . ' ' . implode(' ', $args);
             echo 'CMD: ' . $realCmd;
             passthru($realCmd);
