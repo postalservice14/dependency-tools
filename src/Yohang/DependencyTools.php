@@ -82,10 +82,11 @@ class DependencyTools
         $process->run(function($type, $buffer) use (&$out) { $out .= $buffer; });
 
         if (!$process->isSuccessful()) {
-            echo 'CMD: ' . $cmd;
-            passthru($cmd);
+            $realCmd = $cmd . ' ' . explode(' ', $args);
+            echo 'CMD: ' . $realCmd;
+            passthru($realCmd);
             echo 'EXEC';
-            exec($cmd);
+            exec($realCmd);
             $stackTrace = var_export(xdebug_get_function_stack(), true);
             throw new \RuntimeException($ifError."\n\n".$out."\n\n".$cmd."\n\n".var_export($args, true)."\n\n".$stackTrace);
         }
