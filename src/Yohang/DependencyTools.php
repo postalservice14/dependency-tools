@@ -82,7 +82,7 @@ class DependencyTools
         $process->run(function($type, $buffer) use (&$out) { $out .= $buffer; });
 
         if (!$process->isSuccessful()) {
-            $realCmd = $cmd . ' ' . explode(' ', $args);
+            $realCmd = $cmd . ' ' . implode(' ', $args);
             echo 'CMD: ' . $realCmd;
             passthru($realCmd);
             echo 'EXEC';
