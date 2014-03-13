@@ -25,7 +25,7 @@ class DependencyTools
                 $options['npm'],
                 'npm',
                 array('install'),
-                'An error occuring when installing NPM dependencies'
+                'An error occurring when installing NPM dependencies'
             );
         }
         if (false !== $options['bower']) {
@@ -34,7 +34,7 @@ class DependencyTools
                 $options['bower'],
                 'bower',
                 array('install'),
-                'An error occuring when installing Bower dependencies'
+                'An error occurring when installing Bower dependencies'
             );
         }
     }
@@ -82,6 +82,10 @@ class DependencyTools
         $process->run(function($type, $buffer) use (&$out) { $out .= $buffer; });
 
         if (!$process->isSuccessful()) {
+            echo 'CMD: ' . $cmd;
+            passthru($cmd);
+            echo 'EXEC';
+            exec($cmd);
             $stackTrace = var_export(xdebug_get_function_stack(), true);
             throw new \RuntimeException($ifError."\n\n".$out."\n\n".$cmd."\n\n".var_export($args, true)."\n\n".$stackTrace);
         }
